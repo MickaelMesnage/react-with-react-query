@@ -1,26 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import ErrorOccured from './components/ErrorOccured';
+import PandaList from './components/PandaList';
+import PandaModification from './components/PandaModification';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+// Create a client
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 60 * 1000,
+      refetchOnWindowFocus: false,
+    },
+  }
+});
+
+const App = () => (
+  // Provide the client to your App
+  <QueryClientProvider client={queryClient}>
+    <div>React application with react-query handler</div>
+    <BrowserRouter>
+      <Link to="/">Accueil</Link>
+      <Link to="/list">Liste des pandas</Link>
+      <Routes>
+        <Route path="/list" element={<PandaList />} />
+        <Route path="/panda/:id" element={<PandaModification />} />
+        <Route path="/error" element={<ErrorOccured />} />
+        <Route path="/" element={<div>Home</div>} />
+      </Routes>
+    </BrowserRouter>
+  </QueryClientProvider>
+);
 
 export default App;
