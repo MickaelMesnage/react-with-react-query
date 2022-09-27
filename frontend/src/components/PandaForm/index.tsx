@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Gender, PandaPayload } from "../../models/Panda";
 
 interface Props {
@@ -8,6 +9,7 @@ interface Props {
 }
 
 const PandaForm = ({ defaultValues, onSubmit, labelButton }: Props) => {
+    const navigate = useNavigate();
     const [name, setName] = useState<string>(defaultValues?.name || '');
     const [age, setAge] = useState<number | undefined>(defaultValues?.age);
     const [gender, setGender] = useState<Gender>(defaultValues?.gender || Gender.Male);
@@ -56,6 +58,7 @@ const PandaForm = ({ defaultValues, onSubmit, labelButton }: Props) => {
                 Male
             </label>
             {error && <p>{error}</p>}
+            <button type="button" onClick={() => navigate(-1)}>Annuler</button>
             <button type="submit">{labelButton}</button>
         </form>
     );
