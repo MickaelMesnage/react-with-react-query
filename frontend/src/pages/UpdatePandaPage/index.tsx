@@ -14,7 +14,7 @@ const UpdatePandaPage = () => {
     const updatePandaMutation = useUpdatePanda(id as string);
 
     if (pandaQuery.isLoading) return <Spinner />;
-    if (pandaQuery.isError) return <Navigate to='/error' />;
+    if (pandaQuery.isError) return <Navigate to={Path.Error} />;
 
     const onSubmit = async (payload: PandaPayload) => {
         updatePandaMutation.mutateAsync(payload)

@@ -2,13 +2,16 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import CreatePandaPage from './pages/CreatePandaPage';
 import ErrorPage from './pages/ErrorPage';
+import HomePage from './pages/HomePage';
 import PandaListPage from './pages/PandaListPage';
 import UpdatePandaPage from './pages/UpdatePandaPage';
 
 export enum Path {
+  Home = '/',
   PandalList = '/pandas',
   Panda = '/panda/:id',
   PandaCreation = '/panda/creation',
+  Error = '/error',
 }
 
 // Create a client
@@ -26,19 +29,19 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <BrowserRouter>
       <header>
-        <Link to="/">Accueil</Link>
-        <Link to="/pandas">Liste des pandas</Link>
+        <Link to={Path.Home}>Accueil</Link>
+        <Link to={Path.PandalList}>Liste des pandas</Link>
       </header>
       <div className='layout-page'>
         <Routes>
           <Route path={Path.PandalList} element={<PandaListPage />} />
           <Route path={Path.Panda} element={<UpdatePandaPage />} />
           <Route path={Path.PandaCreation} element={<CreatePandaPage />} />
-          <Route path="/error" element={<ErrorPage />} />
-          <Route path="/" element={<div>Home</div>} />
+          <Route path={Path.Error} element={<ErrorPage />} />
+          <Route path={Path.Home} element={<HomePage />} />
         </Routes>
       </div>
-      <footer>Github</footer>
+      <footer>Application officiel de PandaLand</footer>
     </BrowserRouter>
   </QueryClientProvider>
 );

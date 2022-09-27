@@ -9,7 +9,7 @@ const PandaListPage = () => {
     const { isLoading, isError, data } = usePandaList();
 
     if (isLoading) return <Spinner />;
-    if (isError) return <Navigate to='/error' />;
+    if (isError) return <Navigate to={Path.Error} />;
 
     return <>
         <h1>&hearts; Liste des pandas &hearts;</h1>
