@@ -1,5 +1,5 @@
 import { Request, Response, Router } from "express";
-import { getPandaById, getPandaList, updatePanda } from "./persitence";
+import { createPanda, getPandaById, getPandaList, updatePanda } from "./persitence";
 
 const pandaRouter = Router();
 
@@ -12,11 +12,15 @@ pandaRouter.get('/:id', (req: Request, res: Response) => {
     res.json(getPandaById(id));
 });
 
-pandaRouter.post('/:id', (req: Request, res: Response) => {
+pandaRouter.post('/', (req: Request, res: Response) => {
+    const payload = req.body;
+    createPanda(payload);
+    res.json();
+});
+
+pandaRouter.put('/:id', (req: Request, res: Response) => {
     const id = req.params.id;
     const payload = req.body;
-    console.log(payload);
-
     updatePanda(id, payload);
     res.json(getPandaById(id));
 });

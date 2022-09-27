@@ -1,4 +1,5 @@
-import Panda, { Gender } from "./type";
+import { v4 as uuidv4 } from 'uuid';
+import Panda, { Gender, PandaPayload } from "./type";
 
 const data: Array<Panda> = [{
     id: "1254",
@@ -34,13 +35,17 @@ export const getPandaById = (id: string): Panda => {
     return panda;
 }
 
-export const updatePanda = (id: string, payload: Omit<Panda, "id">) => {
+export const updatePanda = (id: string, payload: PandaPayload) => {
     const index = data.findIndex((panda) => panda.id === id);
     if (!index) throw Error("Panda not found");
-
     data[index] = { id, ...payload};
 }
 
 export const getPandaList = (): Array<Panda> => {
     return data;
+}
+
+export const createPanda = (payload: PandaPayload) => {
+    const newPanda = { ...payload, id: uuidv4() };
+    data.push(newPanda);
 }

@@ -2,6 +2,8 @@ import { useQuery } from "@tanstack/react-query"
 import request from "../../axios";
 import { ShortPanda } from "../../models/Panda";
 
+export const PandaListQueryKey = ['pandaList'];
+
 const fetchPandaList = async (): Promise<ShortPanda[]> => {
     const response = await request.get('/pandas');
     const data = response.data;

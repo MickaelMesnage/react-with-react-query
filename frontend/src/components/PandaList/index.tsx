@@ -1,34 +1,28 @@
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { ShortPanda } from "../../models/Panda";
 import "./styles.css";
-import usePandaList from "./usePandaList";
 
+type Props = {
+    pandas: Array<ShortPanda>,
+}
 
-const PandaList = () => {
-    const { isLoading, isError, data } = usePandaList();
-
-    if (isLoading) return <span>Loading...</span>;
-    if (isError) return <Navigate to='/error' />;
-
-    const pandas = data;
-
-    return (
-        <table className="styled-table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Modification</th>
+const PandaList = ({ pandas }: Props) => (
+    <table className="styled-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Modification</th>
+            </tr>
+        </thead>
+        <tbody>
+            {pandas.map(({ id, name }) => (
+                <tr key={id}>
+                    <td>{name}</td>
+                    <td><Link to={`/panda/${id}`}>open</Link></td>
                 </tr>
-            </thead>
-            <tbody>
-                {pandas.map(({ id, name }) => (
-                    <tr key={id}>
-                        <td>{name}</td>
-                        <td><Link to={`/panda/${id}`}>open</Link></td>
-                    </tr>
-                ))}
-            </tbody>
-        </table>
-    );
-};
+            ))}
+        </tbody>
+    </table>
+);
 
 export default PandaList;

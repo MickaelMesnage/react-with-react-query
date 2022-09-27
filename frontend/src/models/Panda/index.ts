@@ -10,6 +10,8 @@ type Panda = {
     gender: Gender;
 }
 
+export type PandaPayload = Omit<Panda, 'id'>;
+
 export type ShortPanda = Pick<Panda, 'id' | 'name'>;
 
 export default Panda;
