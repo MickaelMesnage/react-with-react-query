@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
-import ErrorOccured from './components/ErrorOccured';
+import ErrorOccured from './components/ErrorPage';
 import PandaList from './components/PandaList';
 import PandaModification from './components/PandaModification';
 

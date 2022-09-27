@@ -1,9 +1,17 @@
 import { useQuery } from "@tanstack/react-query"
-import { getPandaList } from "../../fetch";
+import request from "../../axios";
 import { ShortPanda } from "../../models/Panda";
 
+const fetchPandaList = async (): Promise<ShortPanda[]> => {
+    const response = await request.get('/pandas');
+    const data = response.data;
+    console.log({data});
+
+    return data;
+}
+
 const usePandaList = () => {
-    const query = useQuery<ShortPanda[]>(['pandaList'], () => getPandaList());
+    const query = useQuery<ShortPanda[]>(['pandaList'], () => fetchPandaList());
 
     return query;
 }
