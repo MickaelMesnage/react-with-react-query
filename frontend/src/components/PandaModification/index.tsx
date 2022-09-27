@@ -16,7 +16,6 @@ const PandaModification = () => {
             setName(name);
             setAge(age);
         }
-
     }, [data, setName, setAge]);
 
     if (isLoading) return <div>Loading...</div>;
